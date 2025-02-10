@@ -58,9 +58,9 @@ const sessionOptons={
   }
 };
 
-app.get("/", (req,res)=>{
-    res.send("Hi, Iam root");
-});
+// app.get("/", (req,res)=>{
+//     res.send("Hi, Iam root");
+// });
 
 app.use(session(sessionOptons));
 app.use(flash());
