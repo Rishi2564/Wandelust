@@ -36,51 +36,56 @@
             display: flex;
             align-items:center;
         }
+        .fi-btn{
+            border:none;
+            background-color: white;
+            padding:0rem;
+        }
     </style>
     <div id="filters">
         <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-fire"></i></div>
+            <p class="fil-p">Trending</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-bed"></i></div>
+            <p class="fil-p">Rooms</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-mountain-city"></i></div>
+            <p class="fil-p">Iconic Cities</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-mountain"></i></div>
+            <p class="fil-p">Mountains</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-fort-awesome"></i></div>
-            <p>Castles</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-fort-awesome"></i></div>
+            <p class="fil-p">Castles</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-person-swimming"></i></div>
+            <p class="fil-p">Amazing Pools</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-campground"></i></div>
+            <p class="fil-p">Camping</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-cow"></i></div>
+            <p class="fil-p">Farms</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-snowflake"></i></div>
-            <p>Arctic</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-snowflake"></i></div>
+            <p class="fil-p">Arctic</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Domes</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-igloo"></i></div>
+            <p class="fil-p">Domes</p></button>
         </div>
         <div class="filter">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>Boats</p>
+            <button class="fi-btn"><div><i class="fa-solid fa-ship"></i></div>
+            <p class="fil-p">Boats</p></button>
         </div>
         <div class="tax-toggle">   
         <div class="form-check-reverse form-switch">
@@ -91,8 +96,8 @@
     </div>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
      <%for(let listing of allListings){ %>
-        <a href="/listings/<%=listing._id%>" class="listing-link">
-        <div class="card col listing-card">
+             <div class="card col listing-card">
+                <a href="/listings/<%=listing._id%>" class="listing-link" style="color:black">
             <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem">
             <div class="card-img-overlay"></div>
             <div class="card-body">
@@ -119,5 +124,30 @@
         }
      }
     }   );
+    let allListings = <%- JSON.stringify(allListings) %>;
+    let filters = document.getElementsByClassName("filter"); // Collection of filters
+    let listCards = document.getElementsByClassName("listing-card"); // Collection of listings
+
+    // Add event listener to each filter button
+    for (let filter of filters) {
+        filter.addEventListener("click", () => {
+            console.log("clicked filter");
+
+            let filterText = filter.querySelector(".fil-p").textContent.trim(); // Get category text
+
+            // Iterate over listings
+            for (let i = 0; i < listCards.length; i++) {
+                let category = allListings[i].category; // Get category from `allListings`
+                
+                if (category === filterText) {
+                    listCards[i].style.display = "flex";
+                } else {
+                    listCards[i].style.display = "none";
+                }
+            }
+        });
+    }
+    
+
    </script> 
 
